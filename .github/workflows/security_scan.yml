@@ -1,0 +1,16 @@
+name: DevSecOps-Scanner
+on: [push]
+jobs:
+  trivy-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Scan for Vulnerabilities
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'python:3.9-slim'
+          format: 'table'
+          exit-code: '0' 
+          severity: 'CRITICAL,HIGH'
